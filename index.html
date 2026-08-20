@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>BandCoach</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>BandCoach</h1>
+    <p>Entrenador personal de bandas</p>
+  </div>
+  <button id="installBtn" class="secondary hidden">Instalar</button>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="today">Hoy</button>
+  <button class="tab" data-tab="profile">Perfil</button>
+  <button class="tab" data-tab="bands">Bandas</button>
+  <button class="tab" data-tab="program">Programa</button>
+  <button class="tab" data-tab="plan">Semana</button>
+  <button class="tab" data-tab="progress">Progreso</button>
+  <button class="tab" data-tab="history">Historial</button>
+</nav>
+
+<main class="container">
+  <section id="today" class="tabpane active">
+    <div class="card hero">
+      <div>
+        <span class="pill" id="todayDay">Hoy</span>
+        <h2 id="todayTitle">Configura tu programa</h2>
+        <p id="todaySummary" class="muted">Añade tus bandas y crea un programa.</p>
+      </div>
+      <button id="startToday">Empezar sesión</button>
+    </div>
+
+    <div class="card" id="weekStatusCard">
+      <h3>Estado del programa</h3>
+      <div id="programStatus" class="statusgrid"></div>
+    </div>
+
+    <div id="todayExercises" class="card"></div>
+  </section>
+
+  <section id="profile" class="tabpane">
+    <div class="card">
+      <h2>Tu perfil</h2>
+      <div class="grid cols-3">
+        <label>Edad
+          <input id="age" type="number" min="14" max="100" placeholder="Ej. 52">
+        </label>
+        <label>Peso (kg)
+          <input id="weight" type="number" min="30" max="250" step="0.1" placeholder="Ej. 78">
+        </label>
+        <label>Altura (cm)
+          <input id="height" type="number" min="120" max="230" placeholder="Ej. 178">
+        </label>
+        <label>Experiencia
+          <select id="experience">
+            <option value="beginner">Principiante</option>
+            <option value="intermediate" selected>Intermedio</option>
+            <option value="advanced">Avanzado</option>
+          </select>
+        </label>
+        <label>Objetivo principal
+          <select id="goal">
+            <option value="hypertrophy">Desarrollar músculo</option>
+            <option value="fitness">Ponerse en forma</option>
+            <option value="conditioning">Cardio con bandas</option>
+            <option value="strength">Fuerza</option>
+            <option value="endurance">Resistencia muscular</option>
+          </select>
+        </label>
+        <label>Intensidad inicial
+          <select id="intensity">
+            <option value="easy">Suave</option>
+            <option value="moderate" selected>Moderada</option>
+            <option value="hard">Alta</option>
+          </select>
+        </label>
+      </div>
+      <div class="goalbox" id="goalExplanation"></div>
+      <button id="saveProfile">Guardar perfil</button>
+      <span id="profileSaved" class="saved"></span>
+    </div>
+  </section>
+
+  <section id="bands" class="tabpane">
+    <div class="card">
+      <h2>Tus bandas</h2>
+      <p class="muted">Registra las bandas que realmente tienes. BandCoach aprenderá qué banda te funciona en cada ejercicio.</p>
+      <div class="grid cols-4">
+        <label>Nombre / color
+          <input id="bandName" placeholder="Roja">
+        </label>
+        <label>Tipo
+          <select id="bandType">
+            <option value="long">Banda larga / power band</option>
+            <option value="tube">Tubo con asas</option>
+            <option value="mini">Minibanda cerrada</option>
+            <option value="any">Otra / universal</option>
+          </select>
+        </label>
+        <label>Resistencia aprox. (kg)
+          <input id="bandKg" type="number" min="0" max="100" step="0.5" placeholder="10">
+        </label>
+        <label>Notas
+          <input id="bandNotes" placeholder="Media">
+        </label>
+      </div>
+      <button id="addBand">Añadir banda</button>
+      <div id="bandList" class="list"></div>
+    </div>
+  </section>
+
+  <section id="program" class="tabpane">
+    <div class="card">
+      <h2>Diseña tu programa</h2>
+      <div class="grid cols-3">
+        <label>Duración del programa
+          <select id="programWeeks">
+            <option value="4">4 semanas</option>
+            <option value="6">6 semanas</option>
+            <option value="8" selected>8 semanas</option>
+            <option value="10">10 semanas</option>
+            <option value="12">12 semanas</option>
+          </select>
+        </label>
+        <label>Progresión
+          <select id="progressionSpeed">
+            <option value="conservative">Conservadora</option>
+            <option value="normal" selected>Normal</option>
+            <option value="aggressive">Rápida</option>
+          </select>
+        </label>
+        <label>Semana ligera
+          <select id="deloadEvery">
+            <option value="0">Sin descarga programada</option>
+            <option value="4" selected>Cada 4 semanas</option>
+            <option value="5">Cada 5 semanas</option>
+          </select>
+        </label>
+      </div>
+      <p class="muted">La semana ligera reduce volumen e intensidad para facilitar recuperación y mantener continuidad.</p>
+    </div>
+
+    <div class="card">
+      <h3>Días y duración</h3>
+      <div id="scheduleGrid" class="schedule"></div>
+    </div>
+
+    <div class="card">
+      <h3>Prioridades musculares</h3>
+      <p class="muted">Puedes priorizar uno o varios grupos. El modo automático intentará repartir el resto de forma equilibrada.</p>
+      <div id="muscleChecks" class="chips"></div>
+      <div class="row">
+        <button id="generateProgram">Crear / regenerar programa</button>
+        <span id="programSaved" class="saved"></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Resumen del programa</h3>
+      <div id="programOverview"></div>
+    </div>
+  </section>
+
+  <section id="plan" class="tabpane">
+    <div class="card">
+      <h2>Semana actual</h2>
+      <div class="row wrap">
+        <button id="prevWeek" class="secondary">← Semana anterior</button>
+        <span id="weekLabel" class="pill">Semana 1</span>
+        <button id="nextWeek" class="secondary">Semana siguiente →</button>
+      </div>
+      <div id="generatedPlan"></div>
+    </div>
+  </section>
+
+  <section id="progress" class="tabpane">
+    <div class="card">
+      <h2>Aprendizaje por ejercicio</h2>
+      <p class="muted">BandCoach recuerda si una banda te resultó fácil, correcta o dura en cada ejercicio y la usa para la siguiente recomendación.</p>
+      <div id="exerciseProgress"></div>
+    </div>
+
+    <div class="card">
+      <h3>Resumen muscular</h3>
+      <div id="muscleProgress"></div>
+    </div>
+  </section>
+
+  <section id="history" class="tabpane">
+    <div class="card">
+      <h2>Historial</h2>
+      <div class="row wrap">
+        <button id="exportCsv" class="secondary">Exportar CSV</button>
+        <button id="exportJson" class="secondary">Copia de seguridad</button>
+        <button id="clearHistory" class="danger">Borrar historial</button>
+      </div>
+      <div id="historyList"></div>
+    </div>
+  </section>
+</main>
+
+<div id="coachOverlay" class="overlay hidden">
+  <div class="coach">
+    <div class="coachTop">
+      <div>
+        <span id="coachPhase" class="pill">Trabajo</span>
+        <h2 id="coachExercise">Ejercicio</h2>
+        <p id="coachSet" class="muted"></p>
+      </div>
+      <button id="closeCoach" class="secondary">Salir</button>
+    </div>
+
+    <div class="timer" id="coachTimer">00:40</div>
+    <div class="progressbar"><div id="timerBar"></div></div>
+
+    <div id="bandRecommendation" class="bandrec"></div>
+
+    <div id="exerciseGuide" class="guide">
+      <h3>Cómo hacerlo</h3>
+      <p id="exerciseDescription"></p>
+      <div class="guidegrid">
+        <div>
+          <strong>Preparación</strong>
+          <p id="exerciseSetup"></p>
+        </div>
+        <div>
+          <strong>Ejecución</strong>
+          <p id="exerciseExecution"></p>
+        </div>
+      </div>
+      <strong>Puntos clave</strong>
+      <ul id="exerciseCues"></ul>
+      <strong>Evita</strong>
+      <ul id="exerciseErrors"></ul>
+    </div>
+
+    <div class="coachControls">
+      <button id="timerToggle">Iniciar</button>
+      <button id="add15" class="secondary">+15 s</button>
+      <button id="nextStep" class="secondary">Siguiente</button>
+    </div>
+
+    <div id="sessionProgress" class="muted center"></div>
+  </div>
+</div>
+
+<div id="exerciseFeedbackOverlay" class="overlay hidden">
+  <div class="coach finish">
+    <h2 id="feedbackTitle">¿Cómo fue?</h2>
+    <p id="feedbackBand" class="muted"></p>
+    <div class="rating">
+      <button data-exrating="easy">Fácil</button>
+      <button data-exrating="good">Perfecta</button>
+      <button data-exrating="hard">Dura</button>
+    </div>
+    <div class="row wrap">
+      <label style="flex:1">Repeticiones reales
+        <input id="actualReps" placeholder="Ej. 12,12,11">
+      </label>
+      <label style="flex:1">Nota opcional
+        <input id="exerciseNote" placeholder="Ej. hombro izquierdo cansado">
+      </label>
+    </div>
+  </div>
+</div>
+
+<div id="finishOverlay" class="overlay hidden">
+  <div class="coach finish">
+    <h2>Sesión completada</h2>
+    <p>¿Cómo te ha resultado la sesión en conjunto?</p>
+    <div class="rating">
+      <button data-rating="easy">Demasiado fácil</button>
+      <button data-rating="good">Bien ajustada</button>
+      <button data-rating="hard">Demasiado dura</button>
+    </div>
+    <p class="muted">La próxima semana se ajustará ligeramente según tu respuesta y la de cada ejercicio.</p>
+  </div>
+</div>
+
+<footer>
+  BandCoach es una herramienta de entrenamiento general. Si aparece dolor agudo, mareo o una molestia anormal, detén la sesión.
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
