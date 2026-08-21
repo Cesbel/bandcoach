@@ -10,140 +10,27 @@ strength:"Fuerza: bandas exigentes, menos repeticiones, técnica estricta y desc
 endurance:"Resistencia muscular: más repeticiones o tiempo bajo tensión con descansos cortos."
 };
 const TARGET_MAP={full:["back","chest","shoulders","arms","legs","glutes","core"],upper:["back","chest","shoulders","arms","core"],lower:["legs","glutes","core"],back:["back","arms","core"],chest:["chest","shoulders","arms"],shoulders:["shoulders","arms","back"],arms:["arms","shoulders","back"],legs:["legs","glutes","core"],glutes:["glutes","legs","core"],core:["core","back","glutes"]};
-const EXERCISES = [
-  {id:"squat",name:"Sentadilla con banda",muscles:["legs","glutes","core"],types:["long","tube","any"],difficulty:1,load:"heavy",
-   description:"Patrón básico de pierna para cuádriceps, glúteos y estabilidad del tronco.",
-   setup:"Pisa la banda con ambos pies. Lleva el otro extremo a hombros o sujétalo con las manos. Pies algo más abiertos que las caderas.",
-   execution:"Lleva la cadera atrás y abajo, mantén el pecho estable y empuja el suelo para volver arriba.",
-   cues:["Rodillas siguiendo la dirección de los pies.","Mantén tensión abdominal.","Sube sin perder la postura."],
-   errors:["Colapsar las rodillas hacia dentro.","Redondear la espalda.","Elegir tanta tensión que acortes demasiado el recorrido."]},
-  {id:"rdl",name:"Peso muerto rumano con banda",muscles:["glutes","legs","back","core"],types:["long","tube","any"],difficulty:1,load:"heavy",
-   description:"Bisagra de cadera para glúteos, isquios y cadena posterior.",
-   setup:"Pisa la banda y sujeta los extremos. Rodillas ligeramente flexionadas, espalda larga.",
-   execution:"Lleva la cadera atrás manteniendo la banda cerca del cuerpo. Vuelve extendiendo la cadera y apretando glúteos.",
-   cues:["Piensa en cerrar una puerta con la cadera.","Cuello neutro.","Siente tensión en isquios."],
-   errors:["Convertirlo en sentadilla.","Tirar con la zona lumbar.","Subir arqueando exageradamente la espalda."]},
-  {id:"row",name:"Remo con banda",muscles:["back","arms","shoulders"],types:["long","tube","any"],difficulty:1,load:"medium",
-   description:"Trabajo principal de espalda y bíceps, muy útil para compensar posturas prolongadas.",
-   setup:"Ancla la banda delante o pásala por un punto estable. Brazos extendidos, pecho alto.",
-   execution:"Lleva los codos hacia atrás y acerca las manos al tronco. Regresa de forma lenta.",
-   cues:["Hombros lejos de las orejas.","Pausa atrás un instante.","Tronco quieto."],
-   errors:["Encoger hombros.","Balancear el cuerpo.","Soltar la vuelta sin control."]},
-  {id:"chestpress",name:"Press de pecho con banda",muscles:["chest","shoulders","arms","core"],types:["long","tube","any"],difficulty:1,load:"medium",
-   description:"Empuje horizontal para pectoral, tríceps y hombro anterior.",
-   setup:"Ancla la banda detrás a una altura segura. Coloca las manos a ambos lados del pecho.",
-   execution:"Empuja hacia delante hasta extender los brazos sin bloquear violentamente los codos. Vuelve con control.",
-   cues:["Costillas controladas.","Muñecas alineadas.","Mantén tensión continua."],
-   errors:["Arquear demasiado la espalda.","Elevar los hombros.","Usar un anclaje inestable."]},
-  {id:"ohpress",name:"Press de hombro con banda",muscles:["shoulders","arms","core"],types:["long","tube","any"],difficulty:2,load:"medium",
-   description:"Empuje vertical para hombros y tríceps con trabajo de estabilidad del tronco.",
-   setup:"Pisa la banda y coloca las manos a la altura de los hombros.",
-   execution:"Empuja las manos arriba sin arquear la zona lumbar. Baja lentamente.",
-   cues:["Glúteos y abdomen activos.","Cabeza neutra.","Controla la bajada."],
-   errors:["Arquear la espalda.","Subir un hombro antes que el otro.","Usar demasiada tensión."]},
-  {id:"latpulldown",name:"Jalón al pecho con banda",muscles:["back","arms"],types:["long","tube","any"],difficulty:1,load:"medium",
-   description:"Trabajo de dorsal ancho y bíceps con un patrón de tracción vertical.",
-   setup:"Ancla la banda por encima de la cabeza de forma segura. Brazos altos y tronco estable.",
-   execution:"Lleva los codos hacia los costados y las manos hacia la parte alta del pecho.",
-   cues:["Codos hacia los bolsillos.","Pecho estable.","Controla la subida."],
-   errors:["Tirar detrás de la nuca.","Balancear el tronco.","Encoger los hombros."]},
-  {id:"facepull",name:"Face pull",muscles:["back","shoulders","arms"],types:["long","tube","any"],difficulty:1,load:"light",
-   description:"Trabajo de espalda alta y hombro posterior, excelente para postura y estabilidad escapular.",
-   setup:"Ancla la banda a la altura de la cara. Sujeta con las manos separadas.",
-   execution:"Tira hacia la cara abriendo las manos y llevando los codos hacia fuera.",
-   cues:["Pecho estable.","Termina con manos cerca de las sienes.","Movimiento limpio, sin tirón."],
-   errors:["Subir los hombros.","Hiperextender la espalda.","Usar tanta tensión que pierdas la rotación externa."]},
-  {id:"biceps",name:"Curl de bíceps con banda",muscles:["arms"],types:["long","tube","any"],difficulty:1,load:"light",
-   description:"Flexión de codo para bíceps con tensión progresiva.",
-   setup:"Pisa la banda y sujeta los extremos con palmas hacia delante.",
-   execution:"Flexiona los codos sin moverlos hacia delante. Baja en 2-3 segundos.",
-   cues:["Codos pegados al cuerpo.","No balancees el tronco.","Aprieta arriba sin perder postura."],
-   errors:["Mover los codos.","Usar impulso.","Soltar la fase de bajada."]},
-  {id:"triceps",name:"Extensión de tríceps",muscles:["arms","shoulders"],types:["long","tube","any"],difficulty:1,load:"light",
-   description:"Extensión de codo para tríceps.",
-   setup:"Ancla la banda arriba o colócala detrás de la cabeza según el modelo.",
-   execution:"Extiende los codos manteniendo la parte alta del brazo relativamente fija.",
-   cues:["Controla el hombro.","Extiende sin bloquear con violencia.","Vuelve despacio."],
-   errors:["Abrir excesivamente los codos.","Mover todo el brazo.","Tensión excesiva."]},
-  {id:"lateralraise",name:"Elevación lateral",muscles:["shoulders"],types:["long","tube","any"],difficulty:1,load:"light",
-   description:"Trabajo específico de la porción lateral del hombro.",
-   setup:"Pisa la banda con uno o ambos pies. Brazos a los lados.",
-   execution:"Eleva los brazos hasta aproximadamente la altura de los hombros y baja lentamente.",
-   cues:["Codos ligeramente flexionados.","Hombros abajo.","Movimiento suave."],
-   errors:["Subir por encima de lo necesario.","Balancear el cuerpo.","Encoger hombros."]},
-  {id:"split",name:"Split squat con banda",muscles:["legs","glutes","core"],types:["long","tube","any"],difficulty:2,load:"heavy",
-   description:"Trabajo unilateral para pierna y glúteo, además de equilibrio y control.",
-   setup:"Adopta una posición de zancada estable y coloca la banda para añadir resistencia al subir.",
-   execution:"Desciende verticalmente y empuja con el pie delantero para volver arriba.",
-   cues:["Pie delantero completo apoyado.","Rodilla estable.","Tronco alto."],
-   errors:["Perder equilibrio por ir demasiado estrecho.","Rodilla hacia dentro.","Acortar el recorrido por exceso de banda."]},
-  {id:"glutebridge",name:"Puente de glúteo con banda",muscles:["glutes","legs","core"],types:["mini","long","any"],difficulty:1,load:"medium",
-   description:"Extensión de cadera centrada en glúteos.",
-   setup:"Túmbate boca arriba, pies apoyados. Coloca minibanda sobre las rodillas si la tienes.",
-   execution:"Eleva la cadera apretando glúteos y mantén una breve pausa arriba.",
-   cues:["Costillas controladas.","Rodillas estables.","Pausa arriba."],
-   errors:["Empujar desde la zona lumbar.","Separar demasiado los pies.","Perder tensión en la banda."]},
-  {id:"lateralwalk",name:"Caminata lateral con minibanda",muscles:["glutes","legs"],types:["mini","any"],difficulty:1,load:"medium",
-   description:"Trabajo de glúteo medio para estabilidad de pelvis y rodilla.",
-   setup:"Coloca la minibanda sobre rodillas o tobillos. Flexiona ligeramente cadera y rodillas.",
-   execution:"Da pasos laterales cortos manteniendo tensión constante.",
-   cues:["Pelvis nivelada.","Pies paralelos.","Pasos controlados."],
-   errors:["Juntar completamente los pies.","Balancear el tronco.","Dejar caer las rodillas hacia dentro."]},
-  {id:"kickback",name:"Extensión de cadera / kickback",muscles:["glutes","legs","core"],types:["mini","long","tube","any"],difficulty:1,load:"medium",
-   description:"Trabajo de glúteo mayor con énfasis en extensión de cadera.",
-   setup:"Sujeta la banda de forma segura al pie o tobillo y estabiliza el tronco.",
-   execution:"Lleva la pierna hacia atrás sin arquear la espalda. Regresa lentamente.",
-   cues:["Cadera mirando al frente.","Abdomen activo.","Recorrido controlado."],
-   errors:["Arquear la espalda.","Girar la pelvis.","Mover demasiado rápido."]},
-  {id:"pallof",name:"Pallof press",muscles:["core","shoulders"],types:["long","tube","any"],difficulty:1,load:"medium",
-   description:"Ejercicio anti-rotación para fortalecer el core de manera funcional.",
-   setup:"Ancla la banda a un lado a la altura del pecho. Colócate de lado al anclaje.",
-   execution:"Aleja las manos del pecho sin permitir que el tronco gire.",
-   cues:["Pelvis y hombros de frente.","Respira sin perder tensión.","Brazos salen en línea recta."],
-   errors:["Rotar hacia el anclaje.","Inclinarse.","Elegir demasiada tensión."]},
-  {id:"woodchop",name:"Wood chop con banda",muscles:["core","shoulders","back"],types:["long","tube","any"],difficulty:2,load:"medium",
-   description:"Patrón diagonal controlado para core y cintura escapular.",
-   setup:"Ancla la banda a un lado. Colócate estable y con tensión moderada.",
-   execution:"Mueve las manos en diagonal mientras el tronco rota de forma controlada.",
-   cues:["Movimiento desde tronco y cadera.","Rodillas blandas.","Controla el regreso."],
-   errors:["Tirar solo con brazos.","Girar bruscamente.","Perder el equilibrio."]},
-  {id:"deadbug",name:"Dead bug con banda",muscles:["core"],types:["long","tube","any"],difficulty:2,load:"light",
-   description:"Control del tronco y coordinación con resistencia de banda.",
-   setup:"Túmbate boca arriba. Usa la banda como resistencia de brazos o anclada según tu configuración.",
-   execution:"Mueve brazo y pierna contrarios sin perder el control de la zona lumbar.",
-   cues:["Respira despacio.","Lumbar estable.","Menos rango si pierdes control."],
-   errors:["Arquear la zona lumbar.","Ir demasiado rápido.","Tirar del cuello."]},
-  {id:"goodmorning",name:"Buenos días con banda",muscles:["glutes","legs","back","core"],types:["long","tube","any"],difficulty:1,load:"heavy",
-   description:"Bisagra de cadera sencilla para cadena posterior.",
-   setup:"Pisa la banda y pásala por la parte alta de la espalda de forma cómoda.",
-   execution:"Lleva la cadera atrás con espalda larga y vuelve extendiendo la cadera.",
-   cues:["Rodillas ligeramente flexionadas.","Cadera atrás.","Sube apretando glúteos."],
-   errors:["Redondear espalda.","Flexionar demasiado las rodillas.","Sobrecargar cuello con la banda."]},
-  {id:"pullapart",name:"Band pull-apart",muscles:["back","shoulders"],types:["long","any"],difficulty:1,load:"light",
-   description:"Trabajo sencillo de espalda alta y hombro posterior.",
-   setup:"Sujeta una banda ligera delante del pecho con brazos casi extendidos.",
-   execution:"Separa las manos hasta acercar la banda al pecho y vuelve lentamente.",
-   cues:["Hombros abajo.","Pecho estable.","Usa banda ligera."],
-   errors:["Arquear la espalda.","Flexionar mucho los codos.","Hacer rebotes."]}
-];
-
+const POSITION_LABELS={"De pie":"De pie","De pie en zancada":"De pie · zancada","Sentado":"Sentado","Sentado en suelo":"Sentado en suelo","Tumbado boca arriba":"Tumbado boca arriba","Tumbado boca abajo":"Tumbado boca abajo","Tumbado de lado":"Tumbado de lado","Tumbado / plancha":"Plancha / tumbado","Arrodillado":"Arrodillado","Medio arrodillado":"Medio arrodillado","Cuadrupedia":"Cuadrupedia"};
+const ANCHOR_LABELS={"ninguno":"Sin anclaje","pies":"Banda bajo/alrededor de pies","alto":"Anclaje alto","medio-alto":"Anclaje medio-alto","cara":"Anclaje a la altura de la cara","medio":"Anclaje medio","bajo":"Anclaje bajo"};
 const defaultState={
  profile:{age:"",weight:"",height:"",experience:"intermediate",goal:"hypertrophy",intensity:"moderate"},
  bands:[],
+ equipment:{anchor:false,chair:true,mat:true},
  schedule:{mon:{on:true,minutes:30,focus:"auto"},tue:{on:false,minutes:30,focus:"auto"},wed:{on:true,minutes:30,focus:"auto"},thu:{on:false,minutes:30,focus:"auto"},fri:{on:true,minutes:30,focus:"auto"},sat:{on:false,minutes:30,focus:"auto"},sun:{on:false,minutes:30,focus:"auto"}},
  priorities:["full"],
  programConfig:{weeks:8,progressionSpeed:"normal",deloadEvery:4},
  program:[], currentWeek:1, history:[], exerciseLearning:{}, muscleVolume:{}, loadBias:0
 };
-let saved=JSON.parse(localStorage.getItem("bandcoach_v3")||"null");
+let saved=JSON.parse(localStorage.getItem("bandcoach_v4")||"null")||JSON.parse(localStorage.getItem("bandcoach_v3")||"null");
 if(!saved){
  const old=JSON.parse(localStorage.getItem("bandcoach_v2")||"null");
  saved=old?{...defaultState,...old,programConfig:defaultState.programConfig,program:[],currentWeek:1,exerciseLearning:{},muscleVolume:{}}:defaultState;
 }
-let state={...defaultState,...saved,profile:{...defaultState.profile,...(saved.profile||{})},schedule:{...defaultState.schedule,...(saved.schedule||{})},programConfig:{...defaultState.programConfig,...(saved.programConfig||{})}};
+let state={...defaultState,...saved,profile:{...defaultState.profile,...(saved.profile||{})},schedule:{...defaultState.schedule,...(saved.schedule||{})},programConfig:{...defaultState.programConfig,...(saved.programConfig||{})},equipment:{...defaultState.equipment,...(saved.equipment||{})}};
+if((state.program||[]).some(w=>(w.sessions||[]).some(sess=>(sess.exercises||[]).some(ex=>!ex.feetStart)))){state.program=[];state.currentWeek=1;localStorage.setItem("bandcoach_v4",JSON.stringify(state));}
 let viewWeek=state.currentWeek||1,activeSession=null,stepIndex=0,remaining=0,initialSeconds=0,timerHandle=null,running=false,pendingFeedbackExercise=null;
 
-function save(){localStorage.setItem("bandcoach_v3",JSON.stringify(state))}
+function save(){localStorage.setItem("bandcoach_v4",JSON.stringify(state))}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 function bandTypeLabel(t){return {long:"Banda larga",tube:"Tubo con asas",mini:"Minibanda",any:"Universal"}[t]||t}
 function focusLabel(v){return Object.fromEntries(MUSCLES)[v]||v}
@@ -176,6 +63,16 @@ $("addBand").addEventListener("click",()=>{
  ["bandName","bandKg","bandNotes"].forEach(id=>$(id).value="");save();renderAll();
 });
 window.removeBand=id=>{state.bands=state.bands.filter(b=>b.id!==id);save();renderAll()};
+
+function loadEquipment(){
+ $("hasAnchor").checked=!!state.equipment.anchor;
+ $("hasChair").checked=!!state.equipment.chair;
+ $("hasMat").checked=!!state.equipment.mat;
+}
+$("saveEquipment").addEventListener("click",()=>{
+ state.equipment={anchor:$("hasAnchor").checked,chair:$("hasChair").checked,mat:$("hasMat").checked};
+ save(); $("equipmentSaved").textContent="Guardado"; setTimeout(()=>$("equipmentSaved").textContent="",1300); renderLibraryStats();
+});
 
 function renderSchedule(){
  $("scheduleGrid").innerHTML=DAYS.map(([id,label])=>{
@@ -221,22 +118,43 @@ function autoFocus(i,n){
  if(n>=4)return ["upper","lower","back","full"][i%4];
  return "full";
 }
-function compatible(ex){return !state.bands.length||state.bands.some(b=>ex.types.includes(b.type)||ex.types.includes("any")||b.type==="any")}
-function chooseExercises(focus,minutes,di,week){
+function compatible(ex){
+ const bandOk=!state.bands.length||state.bands.some(b=>ex.types.includes(b.type)||b.type==="any");
+ if(!bandOk)return false;
+ const needs=ex.needs||[];
+ if(needs.includes("anchor")&&!state.equipment.anchor)return false;
+ if(needs.includes("chair")&&!state.equipment.chair)return false;
+ if(needs.includes("mat")&&!state.equipment.mat)return false;
+ return true
+}
+function chooseExercises(focus,minutes,di,week,usedThisWeek=new Set(),usedPrevWeek=new Set()){
  const targets=TARGET_MAP[focus]||TARGET_MAP.full,count=Math.max(3,Math.min(9,Math.round(minutes/6)));
  const scored=EXERCISES.filter(compatible).map(ex=>{
-  let score=ex.muscles.reduce((s,m)=>s+(targets.includes(m)?3:0),0);
-  state.priorities.forEach(p=>{const pm=TARGET_MAP[p]||[p];if(ex.muscles.some(m=>pm.includes(m)))score+=2});
-  if(state.profile.experience==="beginner"&&ex.difficulty>1)score-=3;
-  return {ex,score:score+((hash(ex.id)+di*7+week*11)%13)/20};
+  let score=(targets.includes(ex.primary)?5:0)+ex.muscles.reduce((s,m)=>s+(targets.includes(m)?1.25:0),0);
+  state.priorities.forEach(p=>{const pm=TARGET_MAP[p]||[p];if(pm.includes(ex.primary))score+=2.5;else if(ex.muscles.some(m=>pm.includes(m)))score+=.8});
+  if(state.profile.experience==="beginner"&&ex.difficulty>1)score-=4;
+  if(usedThisWeek.has(ex.id))score-=100;
+  if(usedPrevWeek.has(ex.id))score-=5;
+  score+=((Math.abs(hash(ex.id))+di*17+week*31)%29)/20;
+  return {ex,score};
  }).sort((a,b)=>b.score-a.score);
- const out=[],mc={};
- for(const x of scored){const main=x.ex.muscles.find(m=>targets.includes(m))||x.ex.muscles[0];if((mc[main]||0)>=2&&out.length<count-1)continue;out.push(x.ex);mc[main]=(mc[main]||0)+1;if(out.length>=count)break}
+ const out=[],primaryCount={},positionCount={},patternCount={};
+ for(const x of scored){
+  const ex=x.ex;if(usedThisWeek.has(ex.id))continue;
+  const p=ex.primary||ex.muscles[0],pos=ex.position||"Otra",pat=ex.pattern||"otro";
+  if((primaryCount[p]||0)>=2&&out.length<count-1)continue;
+  if((positionCount[pos]||0)>=2&&out.length<count-1)continue;
+  if((patternCount[pat]||0)>=1&&out.length<count-1)continue;
+  out.push(ex);primaryCount[p]=(primaryCount[p]||0)+1;positionCount[pos]=(positionCount[pos]||0)+1;patternCount[pat]=(patternCount[pat]||0)+1;
+  if(out.length>=count)break;
+ }
+ if(out.length<count){for(const x of scored){if(out.some(e=>e.id===x.ex.id)||usedThisWeek.has(x.ex.id))continue;out.push(x.ex);if(out.length>=count)break}}
+ if(out.length<count){for(const x of scored){if(out.some(e=>e.id===x.ex.id))continue;out.push(x.ex);if(out.length>=count)break}}
  return out;
 }
 function learning(exid){return state.exerciseLearning[exid]||{bias:0,lastBandId:null,lastRating:null,sessions:0}}
 function recommendBand(ex,isDeload=false){
- const c=state.bands.filter(b=>ex.types.includes(b.type)||ex.types.includes("any")||b.type==="any").sort((a,b)=>(a.kg??999)-(b.kg??999));
+ let compatibleBands=state.bands.filter(b=>ex.types.includes(b.type)||b.type==="any"); const preferred=compatibleBands.filter(b=>(ex.preferredTypes||[]).includes(b.type)); if(preferred.length)compatibleBands=preferred; const c=compatibleBands.sort((a,b)=>(a.kg??999)-(b.kg??999));
  if(!c.length)return {id:null,label:"Banda compatible que permita técnica limpia"};
  const l=learning(ex.id);let base=ex.load==="light"?.25:ex.load==="heavy"?.72:.5;
  base+=state.profile.intensity==="hard"?.10:state.profile.intensity==="easy"?-.10:0;base+=state.loadBias*.05+l.bias*.11;if(isDeload)base-=.12;base=Math.max(0,Math.min(1,base));
@@ -245,31 +163,40 @@ function recommendBand(ex,isDeload=false){
  if(last>=0){if(l.lastRating==="easy")idx=Math.max(idx,Math.min(c.length-1,last+1));if(l.lastRating==="good")idx=last;if(l.lastRating==="hard")idx=Math.min(idx,Math.max(0,last-1))}
  idx=Math.max(0,Math.min(c.length-1,idx));const b=c[idx];return {id:b.id,label:`${b.name}${b.kg?` (${b.kg} kg aprox.)`:""} · ${bandTypeLabel(b.type)}`};
 }
-function makeSession(dayId,label,s,di,total,week,isDeload){
+function makeSession(dayId,label,s,di,total,week,isDeload,usedThisWeek=new Set(),usedPrevWeek=new Set()){
  const focus=s.focus==="auto"?autoFocus(di,total):s.focus,p=prescription(week,isDeload);
  return {dayId,dayLabel:label,minutes:s.minutes,focus,goal:state.profile.goal,intensity:state.profile.intensity,week,isDeload,
-  exercises:chooseExercises(focus,s.minutes,di,week).map(ex=>({...ex,sets:p.sets,reps:p.reps,work:p.work,rest:p.rest,rpe:p.rpe,band:recommendBand(ex,isDeload)}))};
+  exercises:chooseExercises(focus,s.minutes,di,week,usedThisWeek,usedPrevWeek).map(ex=>({...ex,sets:p.sets,reps:p.reps,work:p.work,rest:p.rest,rpe:p.rpe,band:recommendBand(ex,isDeload)}))};
 }
 function generateProgram(){
  readPriorities();state.programConfig={weeks:Number($("programWeeks").value),progressionSpeed:$("progressionSpeed").value,deloadEvery:Number($("deloadEvery").value)};
  const active=DAYS.filter(([id])=>state.schedule[id].on);if(!active.length){alert("Selecciona al menos un día.");return}
  if(!state.bands.length&&!confirm("No has registrado bandas. Crearé el programa con recomendaciones genéricas. ¿Continuar?"))return;
  state.program=[];
- for(let w=1;w<=state.programConfig.weeks;w++){const del=state.programConfig.deloadEvery>0&&w%state.programConfig.deloadEvery===0;state.program.push({week:w,isDeload:del,sessions:active.map(([id,l],i)=>makeSession(id,l,state.schedule[id],i,active.length,w,del))})}
+ let prevWeekUsed=new Set();
+ for(let w=1;w<=state.programConfig.weeks;w++){
+  const del=state.programConfig.deloadEvery>0&&w%state.programConfig.deloadEvery===0,usedThisWeek=new Set(),sessions=[];
+  active.forEach(([id,l],i)=>{const session=makeSession(id,l,state.schedule[id],i,active.length,w,del,usedThisWeek,prevWeekUsed);session.exercises.forEach(ex=>usedThisWeek.add(ex.id));sessions.push(session)});
+  state.program.push({week:w,isDeload:del,sessions});prevWeekUsed=new Set(usedThisWeek);
+ }
  state.currentWeek=1;viewWeek=1;recalcVolume();save();renderAll();$("programSaved").textContent="Programa creado";setTimeout(()=>$("programSaved").textContent="",1500);
 }
 $("generateProgram").addEventListener("click",generateProgram);
-function recalcVolume(){const mv={};state.program.forEach(w=>w.sessions.forEach(s=>s.exercises.forEach(ex=>ex.muscles.forEach(m=>mv[m]=(mv[m]||0)+ex.sets))));state.muscleVolume=mv}
+function recalcVolume(){const mv={};state.program.forEach(w=>w.sessions.forEach(s=>s.exercises.forEach(ex=>{const p=ex.primary||ex.muscles[0];mv[p]=(mv[p]||0)+ex.sets;(ex.secondary||[]).forEach(m=>mv[m]=(mv[m]||0)+ex.sets*.35)})));state.muscleVolume=mv}
 function renderProgramOverview(){
  if(!state.program.length){$("programOverview").innerHTML='<p class="muted">Todavía no has creado un programa.</p>';return}
  const d=state.program.filter(w=>w.isDeload).map(w=>w.week),freq=state.program[0].sessions.length;
  $("programOverview").innerHTML=`<div class="metricgrid"><div class="metric">Duración<strong>${state.program.length} semanas</strong></div><div class="metric">Frecuencia<strong>${freq} días/semana</strong></div><div class="metric">Objetivo<strong>${goalLabel(state.profile.goal)}</strong></div></div><div class="weekBanner ${d.length?"deload":""}"><strong>Progresión:</strong> ${state.programConfig.progressionSpeed==="conservative"?"conservadora":state.programConfig.progressionSpeed==="aggressive"?"rápida":"normal"}.${d.length?` Semanas ligeras: ${d.join(", ")}.`:" Sin descarga programada."}</div>`;
 }
+function renderLibraryStats(){
+ const list=EXERCISES.filter(compatible),positions=new Set(list.map(e=>e.position)).size;
+ $("libraryStats").innerHTML=`<strong>Biblioteca activa:</strong> ${list.length} ejercicios compatibles con tus bandas y material · ${positions} posiciones corporales.<br><span class="muted">BandCoach evita repetir el mismo ejercicio dentro de una semana siempre que existan alternativas, penaliza repetirlo en la semana siguiente y mezcla patrones y posiciones.</span>`;
+}
 function renderWeek(){
  if(!state.program.length){$("weekLabel").textContent="Semana 1";$("generatedPlan").innerHTML='<p class="muted">No hay programa generado.</p>';return}
  viewWeek=Math.max(1,Math.min(state.program.length,viewWeek));const w=state.program[viewWeek-1];$("weekLabel").textContent=`Semana ${w.week}${w.isDeload?" · ligera":""}`;
  $("generatedPlan").innerHTML=`<div class="weekBanner ${w.isDeload?"deload":""}"><strong>${w.isDeload?"Semana de descarga":"Semana de progreso"}</strong><br><span class="muted">${w.isDeload?"Menos volumen y banda algo más suave.":"Progresión gradual según objetivo y respuestas."}</span></div>`+
- w.sessions.map(s=>`<div class="planDay"><div class="planHead"><div><strong>${s.dayLabel}</strong> · ${s.minutes} min · ${focusLabel(s.focus)}</div><span class="pill">${goalLabel(s.goal)}</span></div>${s.exercises.map(ex=>`<div class="exerciseRow"><strong>${ex.name}</strong><div class="exerciseMeta"><span class="mini">${ex.sets} series</span><span class="mini">${ex.reps}</span><span class="mini">trabajo ${ex.work}s</span><span class="mini">descanso ${ex.rest}s</span><span class="mini">${esc(ex.band.label)}</span></div></div>`).join("")}</div>`).join("");
+ w.sessions.map(s=>`<div class="planDay"><div class="planHead"><div><strong>${s.dayLabel}</strong> · ${s.minutes} min · ${focusLabel(s.focus)}</div><span class="pill">${goalLabel(s.goal)}</span></div>${s.exercises.map(ex=>`<div class="exerciseRow"><strong>${ex.name}</strong><div class="exerciseMeta"><span class="mini">${ex.sets} series</span><span class="mini">${ex.reps}</span><span class="mini">${esc(ex.position)}</span><span class="mini">${esc(ANCHOR_LABELS[ex.anchor]||ex.anchor)}</span><span class="mini">trabajo ${ex.work}s</span><span class="mini">descanso ${ex.rest}s</span><span class="mini">${esc(ex.band.label)}</span></div></div>`).join("")}</div>`).join("");
 }
 $("prevWeek").addEventListener("click",()=>{viewWeek--;renderWeek()});$("nextWeek").addEventListener("click",()=>{viewWeek++;renderWeek()});
 
@@ -285,7 +212,7 @@ function renderToday(){
  const s=todaySession();renderStatus();
  if(!s){$("todayDay").textContent="Hoy";$("todayTitle").textContent="Configura tu programa";$("todaySummary").textContent="Añade tus bandas y crea un programa.";$("todayExercises").innerHTML='<p class="muted">No hay una sesión disponible.</p>';$("startToday").disabled=true;return}
  $("startToday").disabled=false;$("todayDay").textContent=`Semana ${s.week} · ${s.dayLabel}`;$("todayTitle").textContent=`${focusLabel(s.focus)} · ${goalLabel(s.goal)}`;$("todaySummary").textContent=`${s.minutes} min · ${s.exercises.length} ejercicios · ${s.isDeload?"semana ligera":"semana de progreso"}`;
- $("todayExercises").innerHTML='<h3>Sesión propuesta</h3>'+s.exercises.map(ex=>`<div class="exerciseRow"><strong>${ex.name}</strong><br><span class="muted">${ex.description}</span><div class="exerciseMeta"><span class="mini">${ex.sets} × ${ex.reps}</span><span class="mini">${esc(ex.band.label)}</span></div></div>`).join("");
+ $("todayExercises").innerHTML='<h3>Sesión propuesta</h3>'+s.exercises.map(ex=>`<div class="exerciseRow"><strong>${ex.name}</strong><br><span class="muted">${ex.description}</span><div class="exerciseMeta"><span class="mini">${ex.sets} × ${ex.reps}</span><span class="mini">${esc(ex.position)}</span><span class="mini">${esc(ANCHOR_LABELS[ex.anchor]||ex.anchor)}</span><span class="mini">${esc(ex.band.label)}</span></div></div>`).join("");
 }
 
 function buildSteps(session){const st=[];session.exercises.forEach((ex,ei)=>{for(let set=1;set<=ex.sets;set++){st.push({phase:"work",seconds:ex.work,ex,set,totalSets:ex.sets,ei});if(!(ei===session.exercises.length-1&&set===ex.sets))st.push({phase:"rest",seconds:ex.rest,ex,set,totalSets:ex.sets,ei})}});return st}
@@ -296,8 +223,14 @@ function showStep(){
  stopTimer();const st=activeSession.steps[stepIndex];if(!st){finishSession();return}
  remaining=st.seconds;initialSeconds=st.seconds;$("coachPhase").textContent=st.phase==="work"?"Trabajo":"Descanso";$("coachExercise").textContent=st.phase==="work"?st.ex.name:"Recupera";$("coachSet").textContent=st.phase==="work"?`Serie ${st.set} de ${st.totalSets} · objetivo ${st.ex.reps} · RPE ${st.ex.rpe}`:`Siguiente: ${nextWorkName()}`;
  $("bandRecommendation").innerHTML=st.phase==="work"?`<strong>Banda recomendada:</strong> ${esc(st.ex.band.label)}`:"<strong>Respira y prepárate.</strong> El descanso también entrena.";
- $("exerciseGuide").classList.toggle("hidden",st.phase!=="work");
- if(st.phase==="work"){$("exerciseDescription").textContent=st.ex.description;$("exerciseSetup").textContent=st.ex.setup;$("exerciseExecution").textContent=st.ex.execution;$("exerciseCues").innerHTML=st.ex.cues.map(x=>`<li>${x}</li>`).join("");$("exerciseErrors").innerHTML=st.ex.errors.map(x=>`<li>${x}</li>`).join("")}
+ $("exerciseGuide").classList.toggle("hidden",st.phase!=="work");if(st.phase!=="work")$("exerciseSafetyBox").classList.add("hidden");
+ if(st.phase==="work"){
+ $("exerciseDescription").textContent=st.ex.description;
+ $("exerciseSetup").textContent=`${st.ex.bandSetup} · ${ANCHOR_LABELS[st.ex.anchor]||st.ex.anchor}. Posición: ${st.ex.position}.`;
+ $("exerciseFeet").textContent=st.ex.feetStart;$("exerciseHands").textContent=st.ex.handsStart;$("exerciseExecution").textContent=st.ex.execution;$("exerciseFinish").textContent=st.ex.finish;$("exerciseBreathing").textContent=st.ex.breathing;
+ $("exerciseCues").innerHTML=st.ex.cues.map(x=>`<li>${x}</li>`).join("");$("exerciseErrors").innerHTML=st.ex.errors.map(x=>`<li>${x}</li>`).join("");
+ $("exerciseSafetyBox").classList.toggle("hidden",!st.ex.safety);$("exerciseSafety").textContent=st.ex.safety||"";
+ }
  $("timerToggle").textContent="Iniciar";updateClock();$("sessionProgress").textContent=`Paso ${stepIndex+1} de ${activeSession.steps.length}`;
 }
 function updateClock(){const m=String(Math.floor(remaining/60)).padStart(2,"0"),s=String(remaining%60).padStart(2,"0");$("coachTimer").textContent=`${m}:${s}`;$("timerBar").style.width=`${initialSeconds?Math.max(0,remaining/initialSeconds*100):0}%`}
@@ -352,5 +285,5 @@ let deferredPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.prev
 $("installBtn").addEventListener("click",async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$("installBtn").classList.add("hidden")});
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
 
-function renderAll(){loadProfile();loadProgramConfig();renderBands();renderSchedule();renderMuscles();renderProgramOverview();renderWeek();renderToday();renderExerciseProgress();renderMuscleProgress();renderHistory()}
+function renderAll(){loadProfile();loadProgramConfig();loadEquipment();renderBands();renderSchedule();renderMuscles();renderProgramOverview();renderLibraryStats();renderWeek();renderToday();renderExerciseProgress();renderMuscleProgress();renderHistory()}
 renderAll();

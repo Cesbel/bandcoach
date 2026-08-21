@@ -72,3 +72,7 @@ footer{max-width:960px;margin:auto;padding:4px 18px 26px;color:#64748b;font-size
 @media(max-width:700px){
   .statusgrid,.metricgrid{grid-template-columns:1fr 1fr}
 }
+
+.safetybox{margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff7ed}
+.guidegrid>div{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px}
+.exerciseMeta .mini{line-height:1.25}

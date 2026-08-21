@@ -115,6 +115,12 @@
       <button id="addBand">Añadir banda</button>
       <div id="bandList" class="list"></div>
     </div>
+    <div class="card">
+      <h3>Material auxiliar disponible</h3>
+      <p class="muted">BandCoach lo usa para no proponerte montajes que no puedas hacer con seguridad.</p>
+      <div class="chips"><label class="chip"><input type="checkbox" id="hasAnchor"> Anclaje de puerta / punto fijo seguro</label><label class="chip"><input type="checkbox" id="hasChair"> Silla firme</label><label class="chip"><input type="checkbox" id="hasMat"> Esterilla / suelo cómodo</label></div>
+      <div class="row"><button id="saveEquipment">Guardar material</button><span id="equipmentSaved" class="saved"></span></div>
+    </div>
   </section>
 
   <section id="program" class="tabpane">
@@ -165,7 +171,7 @@
 
     <div class="card">
       <h3>Resumen del programa</h3>
-      <div id="programOverview"></div>
+      <div id="programOverview"></div><div id="libraryStats" class="goalbox"></div>
     </div>
   </section>
 
@@ -227,19 +233,17 @@
       <h3>Cómo hacerlo</h3>
       <p id="exerciseDescription"></p>
       <div class="guidegrid">
-        <div>
-          <strong>Preparación</strong>
-          <p id="exerciseSetup"></p>
-        </div>
-        <div>
-          <strong>Ejecución</strong>
-          <p id="exerciseExecution"></p>
-        </div>
+        <div><strong>Posición y banda</strong><p id="exerciseSetup"></p></div>
+        <div><strong>Pies: inicio → final</strong><p id="exerciseFeet"></p></div>
+        <div><strong>Manos y agarre</strong><p id="exerciseHands"></p></div>
+        <div><strong>Ejecución</strong><p id="exerciseExecution"></p></div>
+        <div><strong>Final del movimiento</strong><p id="exerciseFinish"></p></div>
+        <div><strong>Respiración</strong><p id="exerciseBreathing"></p></div>
       </div>
       <strong>Puntos clave</strong>
       <ul id="exerciseCues"></ul>
       <strong>Evita</strong>
-      <ul id="exerciseErrors"></ul>
+      <ul id="exerciseErrors"></ul><div id="exerciseSafetyBox" class="safetybox hidden"><strong>Seguridad específica</strong><p id="exerciseSafety"></p></div>
     </div>
 
     <div class="coachControls">
@@ -289,6 +293,7 @@
   BandCoach es una herramienta de entrenamiento general. Si aparece dolor agudo, mareo o una molestia anormal, detén la sesión.
 </footer>
 
+<script src="exercise_library.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
