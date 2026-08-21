@@ -76,3 +76,23 @@ footer{max-width:960px;margin:auto;padding:4px 18px 26px;color:#64748b;font-size
 .safetybox{margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff7ed}
 .guidegrid>div{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px}
 .exerciseMeta .mini{line-height:1.25}
+
+/* v5: instructor UX + exercise diagrams */
+.coach{padding-bottom:190px}
+.coachDock{position:sticky;bottom:0;z-index:8;margin:22px -20px -20px;padding:12px 20px 16px;background:rgba(255,255,255,.97);border-top:1px solid var(--line);box-shadow:0 -10px 28px rgba(15,23,42,.10);backdrop-filter:blur(8px)}
+.coachDock.restMode{background:rgba(248,250,252,.98)}
+.dockTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.dockTimer{font-size:2.65rem;margin:0;line-height:1}
+.dockPhase{font-size:.75rem;font-weight:900;letter-spacing:.08em}
+.dockProgressText{margin-top:3px;font-size:.82rem}
+.coachDock .coachControls{margin-top:10px;display:grid;grid-template-columns:1.4fr .8fr 1fr}
+.visualCard{margin:14px 0 16px;border:1px solid var(--line);border-radius:16px;background:#f8fafc;overflow:hidden}
+.visualTitle{display:flex;justify-content:space-between;gap:10px;padding:10px 12px 4px}.visualTitle span{color:var(--muted);font-size:.82rem}
+.exerciseDiagram{width:100%;min-height:170px;padding:0 8px}.exerciseDiagram svg{display:block;width:100%;height:auto;max-height:240px}
+.visualNote{font-size:.78rem;color:var(--muted);padding:0 12px 10px}
+.exerciseDiagram .body{stroke:#0f172a;stroke-width:4;stroke-linecap:round}.exerciseDiagram .bodyFill{fill:#0f172a}.exerciseDiagram .ground{stroke:#cbd5e1;stroke-width:2}.exerciseDiagram .equipment{fill:none;stroke:#64748b;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.exerciseDiagram .band{stroke:#ea580c;stroke-width:4;stroke-linecap:round;stroke-dasharray:5 3}.exerciseDiagram .anchorDot{fill:#ea580c}.exerciseDiagram .moveArrow{stroke:#2563eb;stroke-width:3;stroke-linecap:round}.exerciseDiagram .arrowHead{fill:#2563eb}.exerciseDiagram .diagramLabel{font-size:11px;font-weight:900;fill:#334155}.exerciseDiagram .diagramMeta{font-size:10px;fill:#64748b}
+.exerciseWithThumb{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center}.exerciseThumb{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:3px}.exerciseThumb .exerciseDiagram{}.exerciseThumb svg{display:block;width:100%;height:auto}.exerciseThumb .diagramMeta{display:none}.exerciseThumb .diagramLabel{font-size:13px}
+@media(max-width:600px){
+ .coach{padding:14px;padding-bottom:184px}.coachDock{margin-left:-14px;margin-right:-14px;margin-bottom:-14px;padding-left:14px;padding-right:14px}.dockTimer{font-size:2.25rem}.coachDock .coachControls{grid-template-columns:1.25fr .7fr 1fr;gap:7px}.coachDock .coachControls button{padding:10px 8px;font-size:.88rem}
+ .exerciseWithThumb{grid-template-columns:92px 1fr}.exerciseThumb .diagramLabel{font-size:15px}.visualTitle{align-items:flex-start}.exerciseDiagram{padding:0;min-height:155px}.exerciseDiagram svg{max-height:210px}
+}

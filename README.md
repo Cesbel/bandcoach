@@ -1,3 +1,15 @@
+# BandCoach v5
+
+## Novedades v5
+- Temporizador y controles movidos a una barra inferior **sticky**: permanecen visibles aunque la explicación sea larga.
+- La barra distingue TRABAJO y DESCANSO y conserva progreso, +15 s y Siguiente.
+- Cada ejercicio tiene ahora un **esquema Inicio → Final** generado desde su posición, patrón de movimiento, anclaje y tipo de banda.
+- El esquema aparece grande en modo instructor y como miniatura en la sesión propuesta.
+- Las fichas técnicas detalladas de v4 se mantienen intactas.
+- Cache actualizada a v5 para facilitar el despliegue en GitHub Pages.
+
+> Los esquemas son orientativos; la descripción técnica, el rango sin dolor y la estabilidad tienen prioridad.
+
 # BandCoach v4
 
 Versión avanzada centrada exclusivamente en entrenamiento con bandas.

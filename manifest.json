@@ -1,9 +1,9 @@
 {
-  "name": "BandCoach v4 - Entrenador de bandas",
+  "name": "BandCoach v5 - Entrenador visual de bandas",
   "short_name": "BandCoach",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f1f5f9",
   "theme_color": "#0f172a",
-  "description": "Entrenador adaptativo con 70 ejercicios, variedad semanal y técnica detallada."
+  "description": "Entrenador de bandas con esquemas Inicio-Final, técnica detallada y temporizador siempre visible."
 }

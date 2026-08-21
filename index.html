@@ -224,14 +224,17 @@
       <button id="closeCoach" class="secondary">Salir</button>
     </div>
 
-    <div class="timer" id="coachTimer">00:40</div>
-    <div class="progressbar"><div id="timerBar"></div></div>
-
     <div id="bandRecommendation" class="bandrec"></div>
 
     <div id="exerciseGuide" class="guide">
       <h3>Cómo hacerlo</h3>
       <p id="exerciseDescription"></p>
+
+      <div class="visualCard">
+        <div class="visualTitle"><strong>Esquema del movimiento</strong><span>Inicio → Final</span></div>
+        <div id="exerciseDiagram" class="exerciseDiagram" aria-label="Esquema orientativo del ejercicio"></div>
+        <div class="visualNote">Esquema orientativo: manda la técnica descrita y un rango cómodo, no copiar el dibujo al milímetro.</div>
+      </div>
       <div class="guidegrid">
         <div><strong>Posición y banda</strong><p id="exerciseSetup"></p></div>
         <div><strong>Pies: inicio → final</strong><p id="exerciseFeet"></p></div>
@@ -246,13 +249,21 @@
       <ul id="exerciseErrors"></ul><div id="exerciseSafetyBox" class="safetybox hidden"><strong>Seguridad específica</strong><p id="exerciseSafety"></p></div>
     </div>
 
-    <div class="coachControls">
-      <button id="timerToggle">Iniciar</button>
-      <button id="add15" class="secondary">+15 s</button>
-      <button id="nextStep" class="secondary">Siguiente</button>
+    <div class="coachDock" id="coachDock">
+      <div class="dockTop">
+        <div>
+          <span id="dockPhase" class="dockPhase">TRABAJO</span>
+          <div id="sessionProgress" class="muted dockProgressText"></div>
+        </div>
+        <div class="timer dockTimer" id="coachTimer">00:40</div>
+      </div>
+      <div class="progressbar"><div id="timerBar"></div></div>
+      <div class="coachControls">
+        <button id="timerToggle">Iniciar</button>
+        <button id="add15" class="secondary">+15 s</button>
+        <button id="nextStep" class="secondary">Siguiente</button>
+      </div>
     </div>
-
-    <div id="sessionProgress" class="muted center"></div>
   </div>
 </div>
 
